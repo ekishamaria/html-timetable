@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 2rem;
+        }
+        nav {
+            margin-bottom: 2rem;
+        }
+        nav a {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+        .interactive {
+            cursor: pointer;
+            color: #007BFF;
+        }
+        .interactive:hover {
+            text-decoration: underline;
+        }
+        .details-container {
+            display: none;
+            background: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 1rem;
+        }
+        .details-container h3 {
+            margin-top: 0;
+        }
+        .details-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .details-container li {
+            margin: 0.5rem 0;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: #fff;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Class Timetable</h1>
+    </header>
+    <div class="container">
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="profile.html">Profile</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="logout.html">Logout</a>
+        </nav>
+        <h2>Timetable for the Week</h2>
+        <table id="timetable">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>9:00 AM - 10:00 AM</td>
+                    <td class="interactive" onclick="showDetails('Monday')">Distributed Computing</td>
+                    <td class="interactive" onclick="showDetails('Tuesday')">App Development</td>
+                    <td class="interactive" onclick="showDetails('Wednesday')">Compiler Design</td>
+                    <td class="interactive" onclick="showDetails('Thursday')">Disaster Management</td>
+                    <td class="interactive" onclick="showDetails('Friday')">Web Technology</td>
+                </tr>
+                <tr>
+                    <td>10:15 AM - 11:15 AM</td>
+                    <td class="interactive" onclick="showDetails('Monday')">App Development</td>
+                    <td class="interactive" onclick="showDetails('Tuesday')">Distributed Computing</td>
+                    <td class="interactive" onclick="showDetails('Wednesday')">Disaster Management</td>
+                    <td class="interactive" onclick="showDetails('Thursday')">Web Technology</td>
+                    <td class="interactive" onclick="showDetails('Friday')">Computer Networks</td>
+                </tr>
+                <tr>
+                    <td>11:30 AM - 12:30 PM</td>
+                    <td class="interactive" onclick="showDetails('Monday')">Compiler Design</td>
+                    <td class="interactive" onclick="showDetails('Tuesday')">Disaster Management</td>
+                    <td class="interactive" onclick="showDetails('Wednesday')">Web Technology</td>
+                    <td class="interactive" onclick="showDetails('Thursday')">Computer Networks</td>
+                    <td class="interactive" onclick="showDetails('Friday')">Distributed Computing</td>
+                </tr>
+                <tr>
+                    <td>1:00 PM - 2:00 PM</td>
+                    <td class="interactive" onclick="showDetails('Monday')">Web Technology</td>
+                    <td class="interactive" onclick="showDetails('Tuesday')">Computer Networks</td>
+                    <td class="interactive" onclick="showDetails('Wednesday')">Distributed Computing</td>
+                    <td class="interactive" onclick="showDetails('Thursday')">App Development</td>
+                    <td class="interactive" onclick="showDetails('Friday')">Compiler Design</td>
+                </tr>
+                <tr>
+                    <td>2:15 PM - 3:15 PM</td>
+                    <td class="interactive" onclick="showDetails('Monday')">Computer Networks</td>
+                    <td class="interactive" onclick="showDetails('Tuesday')">Web Technology</td>
+                    <td class="interactive" onclick="showDetails('Wednesday')">App Development</td>
+                    <td class="interactive" onclick="showDetails('Thursday')">Compiler Design</td>
+                    <td class="interactive" onclick="showDetails('Friday')">Disaster Management</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="detailsContainer" class="details-container">
+            <h3>Timetable Details for <span id="dayName">Monday</span></h3>
+            <ul id="detailsList">
+                <!-- Details will be inserted here dynamically -->
+            </ul>
+            <button onclick="hideDetails()">Close</button>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Class Timetable. All Rights Reserved.</p>
+    </footer>
+    <script>
+        // Function to show details for a selected day
+        function showDetails(day) {
+            var details = {
+                'Monday': [
+                    { time: '9:00 AM - 10:00 AM', subject: 'Distributed Computing', faculty: 'Ms. Limsa' },
+                    { time: '10:15 AM - 11:15 AM', subject: 'App Development', faculty: 'Ms. Jeevitha' },
+                    { time: '11:30 AM - 12:30 PM', subject: 'Compiler Design', faculty: 'Dr. Jainish' },
+                    { time: '1:00 PM - 2:00 PM', subject: 'Web Technology', faculty: 'Dr. Alinda' },
+                    { time: '2:15 PM - 3:15 PM', subject: 'Computer Networks', faculty: 'Dr. Remegius' }
+                ],
+                'Tuesday': [
+                    { time: '9:00 AM - 10:00 AM', subject: 'App Development', faculty: 'Ms. Jeevitha' },
+                    { time: '10:15 AM - 11:15 AM', subject: 'Distributed Computing', faculty: 'Ms. Limsa' },
+                    { time: '11:30 AM - 12:30 PM', subject: 'Disaster Management', faculty: 'Dr. Alinda' },
+                    { time: '1:00 PM - 2:00 PM', subject: 'Web Technology', faculty: 'Dr. Remegius' },
+                    { time: '2:15 PM - 3:15 PM', subject: 'Computer Networks', faculty: 'Ms. Delphy' }
+                ],
+                'Wednesday': [
+                    { time: '9:00 AM - 10:00 AM', subject: 'Compiler Design', faculty: 'Dr. Jainish' },
+                    { time: '10:15 AM - 11:15 AM', subject: 'Disaster Management', faculty: 'Dr. Alinda' },
+                    { time: '11:30 AM - 12:30 PM', subject: 'Web Technology', faculty: 'Dr. Remegius' },
+                    { time: '1:00 PM - 2:00 PM', subject: 'Distributed Computing', faculty: 'Ms. Limsa' },
+                    { time: '2:15 PM - 3:15 PM', subject: 'App Development', faculty: 'Ms. Jeevitha' }
+                ],
+                'Thursday': [
+                    { time: '9:00 AM - 10:00 AM', subject: 'Disaster Management', faculty: 'Dr. Alinda' },
+                    { time: '10:15 AM - 11:15 AM', subject: 'Web Technology', faculty: 'Dr. Remegius' },
+                    { time: '11:30 AM - 12:30 PM', subject: 'Computer Networks', faculty: 'Ms. Delphy' },
+                    { time: '1:00 PM - 2:00 PM', subject: 'App Development', faculty: 'Ms. Jeevitha' },
+                    { time: '2:15 PM - 3:15 PM', subject: 'Compiler Design', faculty: 'Dr. Jainish' }
+                ],
+                'Friday': [
+                    { time: '9:00 AM - 10:00 AM', subject: 'Web Technology', faculty: 'Dr. Remegius' },
+                    { time: '10:15 AM - 11:15 AM', subject: 'Computer Networks', faculty: 'Ms. Delphy' },
+                    { time: '11:30 AM - 12:30 PM', subject: 'Distributed Computing', faculty: 'Ms. Limsa' },
+                    { time: '1:00 PM - 2:00 PM', subject: 'Compiler Design', faculty: 'Dr. Jainish' },
+                    { time: '2:15 PM - 3:15 PM', subject: 'Disaster Management', faculty: 'Dr. Alinda' }
+                ]
+            };
+
+            var detailsContainer = document.getElementById('detailsContainer');
+            var dayName = document.getElementById('dayName');
+            var detailsList = document.getElementById('detailsList');
+
+            // Clear previous details
+            detailsList.innerHTML = '';
+
+            // Populate new details
+            dayName.textContent = day;
+            details[day].forEach(function(item) {
+                var li = document.createElement('li');
+                li.textContent = `${item.time}: ${item.subject} - Faculty: ${item.faculty}`;
+                detailsList.appendChild(li);
+            });
+
+            // Show details container
+            detailsContainer.style.display = 'block';
+        }
+
+        // Function to hide the details container
+        function hideDetails() {
+            document.getElementById('detailsContainer').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
